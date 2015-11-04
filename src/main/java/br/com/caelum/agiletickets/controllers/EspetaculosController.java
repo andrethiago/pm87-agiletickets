@@ -38,7 +38,6 @@ public class EspetaculosController {
 	private Validator validator;
 	private Agenda agenda;
 	private DiretorioDeEstabelecimentos estabelecimentos;
-	private Estabelecimento estabelecimento;
 	
 	/** @deprecated CDI eyes only*/
 	protected EspetaculosController() {
@@ -140,13 +139,9 @@ public class EspetaculosController {
 		if (espetaculo == null) {
 			validator.add(new SimpleMessage("", ""));
 		}
-		validator.onErrorUse(status()).notFound();
+		//validator.onErrorUse(status()).notFound();
 		return espetaculo;
 	}
 
-	// metodo antigo. aqui soh por backup
-	private Estabelecimento criaEstabelecimento(Long id) {
-		return estabelecimentos.todos().get(0);
-	}
 	
 }
