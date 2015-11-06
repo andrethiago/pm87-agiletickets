@@ -13,6 +13,8 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
+import sun.print.PSPrinterJob.EPSPrinter;
+
 @Entity
 public class Sessao {
 
@@ -109,6 +111,14 @@ public class Sessao {
 
 	public BigDecimal getPreco() {
 		return preco;
+	}
+	
+	public boolean quantidadeIngressosDisponiveisMenorOuIgualA(double porcentagem) {
+		return (getTotalIngressos() - getIngressosReservados()) / getTotalIngressos().doubleValue() <= porcentagem;
+	}
+	
+	public BigDecimal getPrecoEspetaculo() {
+		return espetaculo.calculaPreco(this);
 	}
 	
 }

@@ -2,6 +2,8 @@ package br.com.caelum.agiletickets.models;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,11 +15,18 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.joda.time.Weeks;
 
 @Entity
 public class Espetaculo {
+	
+	 static final double VINTE_POR_CENTO = 0.20;
+	 static final double CINQUENTA_POR_CENTO = 0.50;
+	 static final double DEZ_POR_CENTO = 0.10;
+	 static final double CINCO_POR_CENTO = 0.05;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,7 +107,31 @@ public class Espetaculo {
      */
 	public List<Sessao> criaSessoes(LocalDate inicio, LocalDate fim, LocalTime horario, Periodicidade periodicidade) {
 		// ALUNO: Não apague esse metodo. Esse sim será usado no futuro! ;)
-		return null;
+		if(inicio.isAfter(fim)) {
+			throw new IllegalArgumentException();
+		}
+		
+		List<Sessao> sessoes = new ArrayList<Sessao>();
+		
+		if(Periodicidade.DIARIA.equals(periodicidade)) {
+			Integer quantidadeDias = Days.daysBetween(inicio, fim).getDays();
+			for(int i = 0; i <= quantidadeDias; i++) {
+				Sessao sessao = new Sessao();
+				sessao.setEspetaculo(this);
+				sessao.setInicio(inicio.plusDays(i).toDateTime(horario));
+				sessoes.add(sessao);
+			}
+		} else {
+			Integer quandidadeSemanas = Weeks.weeksBetween(inicio, fim).getWeeks();
+			for(int i = 0; i <= quandidadeSemanas; i++) {
+				Sessao sessao = new Sessao();
+				sessao.setEspetaculo(this);
+				sessao.setInicio(inicio.plusWeeks(i).toDateTime(horario));
+				sessoes.add(sessao);
+			}
+		}
+		
+		return sessoes;
 	}
 	
 	public boolean Vagas(int qtd, int min)
@@ -129,5 +162,9 @@ public class Espetaculo {
        if (totDisp >= qtd) return true;
        else return false;
    }
+   
+   public BigDecimal calculaPreco(Sessao sessao) {
+		return sessao.getPreco();
+	}
 
 }

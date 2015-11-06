@@ -23,6 +23,11 @@ public class SessaoTestDataBuilder {
 		this.espetaculo.setTipo(tipo);
 		return this;
 	}
+	
+	public SessaoTestDataBuilder deUmEspetaculoDoTipo(Espetaculo espetaculo){
+		this.espetaculo = espetaculo;
+		return this;
+	}
 
 	public SessaoTestDataBuilder comOPreco(double preco) {
 		this.preco = BigDecimal.valueOf(preco);

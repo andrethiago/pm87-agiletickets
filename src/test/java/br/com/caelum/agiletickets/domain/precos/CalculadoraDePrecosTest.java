@@ -6,7 +6,12 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import br.com.caelum.agiletickets.models.Ballet;
+import br.com.caelum.agiletickets.models.Cinema;
+import br.com.caelum.agiletickets.models.Orquestra;
 import br.com.caelum.agiletickets.models.Sessao;
+import br.com.caelum.agiletickets.models.Show;
+import br.com.caelum.agiletickets.models.Teatro;
 import br.com.caelum.agiletickets.models.TipoDeEspetaculo;
 
 public class CalculadoraDePrecosTest {
@@ -15,7 +20,7 @@ public class CalculadoraDePrecosTest {
 	public void deveConsiderarQuantidadeAoCalcularPrecoTotal(){
 		Sessao sessao =	SessaoTestDataBuilder
 			.umaSessao()
-			.deUmEspetaculoDoTipo(TipoDeEspetaculo.TEATRO)
+			.deUmEspetaculoDoTipo(new Teatro())
 			.comOPreco(10.0)
 			.build();
 		
@@ -28,7 +33,7 @@ public class CalculadoraDePrecosTest {
 	public void deveAplicar10PorCentoAMaisNosUltimosIngressosQuandoForCinema(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.CINEMA)
+				.deUmEspetaculoDoTipo(new Cinema())
 				.comTotalIngressos(100)
 				.comIngressoReservados(95)
 				.comOPreco(20.0)
@@ -43,7 +48,7 @@ public class CalculadoraDePrecosTest {
 	public void naoDeveAplicarAcrescimoNosPrimeirosIngressosQuandoForCinema(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.CINEMA)
+				.deUmEspetaculoDoTipo(new Cinema())
 				.comTotalIngressos(100)
 				.comIngressoReservados(10)
 				.comOPreco(20.0)
@@ -58,7 +63,7 @@ public class CalculadoraDePrecosTest {
 	public void deveAplicar10PorCentoAMaisNosUltimosIngressosQuandoForShow(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.SHOW)
+				.deUmEspetaculoDoTipo(new Show())
 				.comTotalIngressos(200)
 				.comIngressoReservados(195)
 				.comOPreco(100.0)
@@ -73,7 +78,7 @@ public class CalculadoraDePrecosTest {
 	public void naoDeveAplicarAcrescimoNosPrimeirosIngressosQuandoForShow(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.SHOW)
+				.deUmEspetaculoDoTipo(new Show())
 				.comTotalIngressos(200)
 				.comIngressoReservados(15)
 				.comOPreco(100.0)
@@ -88,7 +93,7 @@ public class CalculadoraDePrecosTest {
 	public void deveAplicar20PorCentoAMaisNosUltimosIngressosQuandoForBallet(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.BALLET)
+				.deUmEspetaculoDoTipo(new Ballet())
 				.comTotalIngressos(50)
 				.comIngressoReservados(25)
 				.comOPreco(500.0)
@@ -104,7 +109,7 @@ public class CalculadoraDePrecosTest {
 	public void naoDeveAplicarAcrescimoNosPrimeirosIngressosQuandoForBallet(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.BALLET)
+				.deUmEspetaculoDoTipo(new Ballet())
 				.comTotalIngressos(50)
 				.comIngressoReservados(5)
 				.comOPreco(500.0)
@@ -120,7 +125,7 @@ public class CalculadoraDePrecosTest {
 	public void deveAplicar10AMaisSeDurarMaisDeUmaHoraQuandoForBallet(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.BALLET)
+				.deUmEspetaculoDoTipo(new Ballet())
 				.comTotalIngressos(50)
 				.comIngressoReservados(5)
 				.comOPreco(500.0)
@@ -136,7 +141,7 @@ public class CalculadoraDePrecosTest {
 	public void deveAplicar20PorCentoAMaisNosUltimosIngressosQuandoForOrquestra(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.ORQUESTRA)
+				.deUmEspetaculoDoTipo(new Orquestra())
 				.comTotalIngressos(70)
 				.comIngressoReservados(40)
 				.comOPreco(1000.0)
@@ -152,7 +157,7 @@ public class CalculadoraDePrecosTest {
 	public void naoDeveAplicarAcrescimoNosPrimeirosIngressosQuandoForOrquestra(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.ORQUESTRA)
+				.deUmEspetaculoDoTipo(new Orquestra())
 				.comTotalIngressos(70)
 				.comIngressoReservados(10)
 				.comOPreco(1000.0)
@@ -168,7 +173,7 @@ public class CalculadoraDePrecosTest {
 	public void deveAplicar10AMaisSeDurarMaisDeUmaHoraQuandoForOrquestra(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.ORQUESTRA)
+				.deUmEspetaculoDoTipo(new Orquestra())
 				.comTotalIngressos(70)
 				.comIngressoReservados(65)
 				.comOPreco(1000.0)
@@ -184,7 +189,7 @@ public class CalculadoraDePrecosTest {
 	public void naoDeveAplicarAcrescimoQuandoForTeatro(){
 		Sessao sessao =	SessaoTestDataBuilder
 				.umaSessao()
-				.deUmEspetaculoDoTipo(TipoDeEspetaculo.TEATRO)
+				.deUmEspetaculoDoTipo(new Teatro())
 				.comOPreco(10.0)
 				.build();
 		
