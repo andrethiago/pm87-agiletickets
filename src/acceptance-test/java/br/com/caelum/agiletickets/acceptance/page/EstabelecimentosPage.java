@@ -6,9 +6,11 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class EstabelecimentosPage {
 
@@ -43,8 +45,8 @@ public class EstabelecimentosPage {
 	}
 
 	public void adicioneEstabelecimentoComEstacionamento(boolean temEstacionamento) {
-		form().findElement(By.name("estabelecimento.temEstacionamento"))
-			.sendKeys(temEstacionamento ? "Sim" : "Não");
+		Select select = new Select(form().findElement(By.name("estabelecimento.temEstacionamento")));
+				select.selectByVisibleText(BooleanUtils.toString(temEstacionamento, "Sim", "Não"));
 		adicioneEstabelecimento("qualquer", "qualquer");
 	}
 
