@@ -13,8 +13,6 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
-import sun.print.PSPrinterJob.EPSPrinter;
-
 @Entity
 public class Sessao {
 
