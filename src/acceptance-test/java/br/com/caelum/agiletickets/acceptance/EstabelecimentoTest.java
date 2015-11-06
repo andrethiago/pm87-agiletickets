@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import br.com.caelum.agiletickets.acceptance.page.EstabelecimentosPage;
 
@@ -17,7 +18,7 @@ public class EstabelecimentoTest {
 
 	@BeforeClass
 	public static void abreBrowser() {
-		browser = new FirefoxDriver();
+		browser = new HtmlUnitDriver();
 	}
 
 	@Before
